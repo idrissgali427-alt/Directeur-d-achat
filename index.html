@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GaliBusiness - Gestion d'Entreprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">GaliBusiness</div>
+        <div class="header-info">
+            <span id="currentDate"></span>
+            <span id="currentTime"></span>
+            <div class="responsible-input">
+                <label for="responsibleName">Responsable:</label>
+                <input type="text" id="responsibleName" placeholder="Nom du responsable">
+            </div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" data-nav-target="dashboard" class="active"><i class="fas fa-home"></i> Tableau de bord</a></li>
+                <li><a href="#" data-nav-target="budgetAchat"><i class="fas fa-calculator"></i> Budgets d'achat</a></li>
+                <li><a href="#" data-nav-target="fournisseurs"><i class="fas fa-truck-moving"></i> Fournisseurs</a></li>
+                <li><a href="#" data-nav-target="bilans"><i class="fas fa-chart-line"></i> Bilans et Rapports</a></li>
+            </ul>
+        </nav>
+
+        <main class="content-area">
+            <section id="dashboard" class="app-section active">
+                <h2>Tableau de bord</h2>
+                <p>Aperçu rapide des indicateurs clés de votre entreprise.</p>
+                <div class="dashboard-grid">
+                    <div class="metric-card">
+                        <h3>Bilan Mensuel du Budget</h3>
+                        <p id="dashboardMonthlyBudgetTotal">0 FCFA</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Bilan des Dépenses Mensuel</h3>
+                        <p id="dashboardMonthlyExpensesTotal">0 FCFA</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Reste d'Argent Mensuel</h3>
+                        <p id="dashboardMonthlyRemainingFunds">0 FCFA</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Coût de Transport Mensuel</h3>
+                        <p id="dashboardMonthlyTransportCost">0 FCFA</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Autres Dépenses Mensuel</h3>
+                        <p id="dashboardMonthlyOtherExpenses">0 FCFA</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="budgetAchat" class="app-section">
+                <h2>Gestion des Budgets d'achat</h2>
+                <p>Enregistrez et suivez les dépenses liées aux achats de matières premières.</p>
+                <form id="budgetAchatForm" class="form-grid">
+                    <div class="form-group">
+                        <label for="numeroRapportBudget">N° Rapport:</label>
+                        <input type="text" id="numeroRapportBudget" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="budgetDepart">Budget de Départ (FCFA):</label>
+                        <input type="number" id="budgetDepart" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="typeMatierePremiere">Type Matière Première:</label>
+                        <input type="text" id="typeMatierePremiere" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="coutMatierePremiere">Coût Matière Première (FCFA):</label>
+                        <input type="number" id="coutMatierePremiere" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="coutTransport">Coût Transport (FCFA):</label>
+                        <input type="number" id="coutTransport" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="autresDepenses">Autres Dépenses (FCFA):</label>
+                        <input type="number" id="autresDepenses" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="resteArgent">Reste Argent (FCFA):</label>
+                        <input type="number" id="resteArgent" step="0.01" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="responsableBudget">Responsable:</label>
+                        <input type="text" id="responsableBudget" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="justificatifsBudget">Justificatifs:</label>
+                        <textarea id="justificatifsBudget" rows="2"></textarea>
+                    </div>
+                    <div class="form-actions full-width">
+                        <button type="submit" id="saveBudgetBtn">Enregistrer le Budget</button>
+                        <button type="button" id="cancelBudgetEditBtn" class="cancel-btn" style="display: none;">Annuler</button>
+                    </div>
+                </form>
+
+                <div class="table-container">
+                    <h3>Historique des Budgets</h3>
+                    <div class="search-bar">
+                        <input type="text" id="searchBudget" placeholder="Rechercher un budget...">
+                    </div>
+                    <table id="budgetAchatTable">
+                        <thead>
+                            <tr>
+                                <th>N° Rapport</th>
+                                <th>Budget Départ</th>
+                                <th>Matière Première</th>
+                                <th>Coût MP</th>
+                                <th>Reste Argent</th>
+                                <th>Coût Transport</th>
+                                <th>Autres Dépenses</th>
+                                <th>Responsable</th>
+                                <th>Justificatifs</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="fournisseurs" class="app-section">
+                <h2>Gestion des Fournisseurs</h2>
+                <p>Enregistrez et gérez les informations de vos fournisseurs.</p>
+                <form id="fournisseurForm" class="form-grid">
+                    <div class="form-group">
+                        <label for="numeroRapportFournisseur">N° Rapport:</label>
+                        <input type="text" id="numeroRapportFournisseur" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="fournisseurNomPrenom">Nom & Prénom / Société:</label>
+                        <input type="text" id="fournisseurNomPrenom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fournisseurPhone">Téléphone:</label>
+                        <input type="tel" id="fournisseurPhone">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="fournisseurAdresse">Adresse:</label>
+                        <input type="text" id="fournisseurAdresse">
+                    </div>
+                    <div class="form-actions full-width">
+                        <button type="submit" id="saveFournisseurBtn">Enregistrer le Fournisseur</button>
+                        <button type="button" id="cancelFournisseurEditBtn" class="cancel-btn" style="display: none;">Annuler</button>
+                    </div>
+                </form>
+
+                <div class="table-container">
+                    <h3>Liste des Fournisseurs</h3>
+                    <div class="search-bar">
+                        <input type="text" id="searchFournisseur" placeholder="Rechercher un fournisseur...">
+                    </div>
+                    <table id="fournisseursTable">
+                        <thead>
+                            <tr>
+                                <th>N° Rapport</th>
+                                <th>Nom / Société</th>
+                                <th>Téléphone</th>
+                                <th>Adresse</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="bilans" class="app-section">
+                <h2>Bilans et Rapports</h2>
+                <p>Analysez les données financières et générez des rapports pour impression.</p>
+                
+                <div class="bilan-controls">
+                    <label for="bilanPeriodFilter">Afficher par:</label>
+                    <select id="bilanPeriodFilter">
+                        <option value="daily">Jour</option>
+                        <option value="monthly">Mois</option>
+                        <option value="annual">Année</option>
+                    </select>
+                    <button id="printButton" class="print-btn"><i class="fas fa-print"></i> Imprimer les Rapports</button>
+                </div>
+
+                <div class="bilan-section" id="bilanDailyContent">
+                    <h3>Bilan Journalier des Dépenses</h3>
+                    <table id="tableBilanDaily">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Nbr Commandes</th>
+                                <th>Montant Total (FCFA)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="bilan-section hidden" id="bilanMonthlyContent">
+                    <h3>Bilan Mensuel des Dépenses</h3>
+                    <table id="tableBilanMonthly">
+                        <thead>
+                            <tr>
+                                <th>Mois-Année</th>
+                                <th>Nbr Commandes</th>
+                                <th>Montant Total (FCFA)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="bilan-section hidden" id="bilanAnnualContent">
+                    <h3>Bilan Annuel des Dépenses</h3>
+                    <table id="tableBilanAnnual">
+                        <thead>
+                            <tr>
+                                <th>Année</th>
+                                <th>Nbr Commandes</th>
+                                <th>Montant Total (FCFA)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Répartition des Dépenses (Diagramme Circulaire)</h3>
+                    <p>Visualisation des coûts de matière première, de transport et des autres dépenses.</p>
+                    <canvas id="expensesPieChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Évolution des Dépenses Mensuelles (Diagramme en Barres)</h3>
+                    <p>Comparaison des dépenses mensuelles sur une période donnée.</p>
+                    <canvas id="monthlyExpensesBarChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
