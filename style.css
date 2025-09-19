@@ -1,0 +1,355 @@
+/* Variables pour un style cohérent */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --background-color: #f4f7f9;
+    --sidebar-color: #2c3e50;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --border-color: #e0e0e0;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* En-tête de l'application */
+header {
+    background-color: var(--sidebar-color);
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 1rem;
+}
+
+.responsible-input {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.responsible-input input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+/* Conteneur principal de l'application */
+.app-container {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
+
+/* Barre de navigation latérale */
+.sidebar-nav {
+    width: 250px;
+    background-color: var(--sidebar-color);
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 15px;
+}
+
+.sidebar-nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: #34495e;
+}
+
+.sidebar-nav a i {
+    margin-right: 10px;
+}
+
+/* Zone de contenu principale */
+.content-area {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+/* Sections de l'application */
+.app-section {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.app-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Cartes pour le tableau de bord */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.metric-card {
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-card h3 {
+    margin-top: 0;
+    color: var(--sidebar-color);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.metric-card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin: 10px 0 0;
+}
+
+/* Formulaires et tableaux */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--sidebar-color);
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.form-actions button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+#saveEntrepriseBtn, #saveAchatBtn, #saveFournisseurBtn, #generateBilanBtn, #generateDiagrammeBtn, #printBilanBtn, #printButton {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.form-actions button:hover {
+    filter: brightness(1.1);
+}
+
+.cancel-btn {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.table-container {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+/* Styles pour les bilans */
+.bilan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.bilan-table td, .bilan-table th {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.bilan-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Styles pour les diagrammes */
+.charts-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 15px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.chart-container {
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+    
+    flex: 0 0 auto;
+    width: 400px; /* Augmenté de 350px à 400px */
+    height: 300px; /* Augmenté de 250px à 300px */
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Règle pour l'impression */
+@media print {
+    body {
+        background-color: #fff;
+    }
+    .app-container, .sidebar-nav, header, .form-grid, .table-container, .bilan-controls, .diagramme-controls {
+        display: none;
+    }
+    .app-section.active {
+        display: block;
+        width: 100%;
+    }
+    #bilanOutput, #diagrammes {
+        display: block;
+        width: 100%;
+        margin-top: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+    .chart-container {
+        width: 100%;
+        page-break-inside: avoid;
+    }
+    .print-btn, .delete-btn {
+        display: none;
+    }
+}
